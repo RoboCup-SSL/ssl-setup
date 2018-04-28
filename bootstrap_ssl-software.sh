@@ -16,11 +16,11 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y  fish vim terminator geany openjdk-8-jdk maven git golang chrony
+sudo apt install -y vim terminator openjdk-8-jdk maven git golang chrony
 
 # setup GO
 echo "export GOPATH=~/go" >> ~/.bashrc
-echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
+echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
 . ~/.bashrc
 
 # blue fox camera support
@@ -74,7 +74,11 @@ sudo ./installDeps.sh
 ./buildAll.sh
 
 # setting up chrony
+# accept all IPv4 connections
 sudo sed -ie 's/#allow 0\/0/allow 0\/0/' /etc/chrony/chrony.conf
+# server time even if unsynchronized
+sudo sed -ie 's/#local stratum/local stratum/' /etc/chrony/chrony.conf
 sudo systemctl restart chrony.service
-# TODO you have to select one computer as the chrony server and add the IP to all other computers in /etc/chrony/chrony.conf as "server 192.168.178.51"
+echo "TODO you have to select one computer as the chrony server and add the IP to all other computers in /etc/chrony/chrony.conf as 'server 192.168.178.51'"
+read
 
