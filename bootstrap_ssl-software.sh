@@ -26,10 +26,10 @@ echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
 # blue fox camera support
 # The links below may not work (e.g. version changed in the mean time). You can download the software manually:
 # https://www.matrix-vision.com/software-drivers-en.html
-wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/install_mvBlueFOX.sh -O install_mvBlueFOX.sh
-wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/mvBlueFOX-x86_64_ABI2-2.26.0.tgz -O mvBlueFOX-x86_64_ABI2-2.26.0.tgz
-chmod +x install_mvBlueFOX.sh 
-./install_mvBlueFOX.sh
+#wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/install_mvBlueFOX.sh -O install_mvBlueFOX.sh
+#wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/mvBlueFOX-x86_64_ABI2-2.26.0.tgz -O mvBlueFOX-x86_64_ABI2-2.26.0.tgz
+#chmod +x install_mvBlueFOX.sh 
+#./install_mvBlueFOX.sh
 
 # ssl-vision
 mkdir -p ~/git
