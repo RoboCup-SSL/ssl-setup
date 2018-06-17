@@ -1,0 +1,26 @@
+ListenAddress: ":4201"
+GeometrySendingInterval: "3s"
+RefereeConnection:
+  SubscribePath: "/ssl-status/field-a/subscribe"
+  MulticastAddress: "224.5.23.1:10003"
+  SendingInterval: "100ms"
+  ServerProxy:
+    Enabled: true 
+    Scheme: "wss"
+    Address: "tigers-mannheim.de"
+    Path: "/ssl-status/field-a/publish"
+    User: ""
+    Password: ""
+    ReconnectInterval: "30s"
+VisionConnection:
+  SubscribePath: "/ssl-vision/field-a/subscribe"
+  MulticastAddress: "224.5.23.2:10006"
+  SendingInterval: "25ms"
+  ServerProxy:
+    Enabled: true 
+    Scheme: "wss"
+    Address: "tigers-mannheim.de"
+    Path: "/ssl-vision/field-a/publish"
+    User: ""
+    Password: ""
+    ReconnectInterval: "30s"
