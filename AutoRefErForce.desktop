@@ -2,5 +2,5 @@
 Version=1.0
 Type=Application
 Name=AutoRef Erforce
-Exec=/home/robocup/git/ssl-autorefs/run_erforce.sh
+Exec=bash -c 'cd /home/robocup/git/ssl-autorefs/ && ./run_erforce.sh'
 Terminal=false
