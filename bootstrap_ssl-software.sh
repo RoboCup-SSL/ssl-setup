@@ -16,7 +16,7 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator openjdk-8-jdk maven git golang chrony
+sudo apt install -y vim terminator openjdk-8-jdk maven git golang chrony net-tools
 
 # setup GO
 if [ -z "`grep GOPATH ~/.bashrc`" ]; then
@@ -77,10 +77,12 @@ go get -u github.com/RoboCup-SSL/ssl-status-board-server/ssl-status-board-proxy
 # autorefs
 mkdir -p ~/git
 cd ~/git
-git clone http://github.com/RoboCup-SSL/ssl-autorefs.git
-cd ssl-autorefs
-sudo ./installDeps.sh
-./buildAll.sh
+if [ ! -d ssl-autorefs ]; then
+	git clone http://github.com/RoboCup-SSL/ssl-autorefs.git
+	cd ssl-autorefs
+	sudo ./installDeps.sh
+	./buildAll.sh
+fi
 
 # setting up chrony
 # accept all IPv4 connections
