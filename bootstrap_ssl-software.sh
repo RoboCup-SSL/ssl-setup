@@ -19,9 +19,11 @@ sudo apt -y dist-upgrade
 sudo apt install -y vim terminator openjdk-8-jdk maven git golang chrony
 
 # setup GO
-echo "export GOPATH=~/go" >> ~/.bashrc
-echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
-. ~/.bashrc
+if [ -z "`grep GOPATH ~/.bashrc`" ]; then
+	echo "export GOPATH=~/go" >> ~/.bashrc
+	echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
+	. ~/.bashrc
+fi
 
 # blue fox camera support
 # The links below may not work (e.g. version changed in the mean time). You can download the software manually:
@@ -34,35 +36,42 @@ echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
 # ssl-vision
 mkdir -p ~/git
 cd ~/git
-git clone http://github.com/RoboCup-SSL/ssl-vision.git
-cd ssl-vision
-./InstallPackagesUbuntu.sh
-make
+if [ ! -d ssl-vision ]; then
+	git clone http://github.com/RoboCup-SSL/ssl-vision.git
+	cd ssl-vision
+	./InstallPackagesUbuntu.sh
+	make -j`nproc`
+fi
 
 # ssl-refbox
 mkdir -p ~/git
 cd ~/git
-git clone http://github.com/RoboCup-SSL/ssl-refbox.git
-cd ssl-refbox
-sudo ./installDeps.sh
-make
+if [ ! -d ssl-refbox ]; then
+	git clone http://github.com/RoboCup-SSL/ssl-refbox.git
+	cd ssl-refbox
+	sudo ./installDeps.sh
+	make -j`nproc`
+fi
 
 # ssl-logtools
 sudo apt install -y libboost-program-options-dev
 mkdir -p ~/git
 cd ~/git
-git clone https://github.com/RoboCup-SSL/ssl-logtools.git
-cd ssl-logtools
-mkdir build
-cd build
-cmake ..
-make 
+if [ ! -d ssl-logtools ]; then
+	git clone https://github.com/RoboCup-SSL/ssl-logtools.git
+	cd ssl-logtools
+	mkdir build
+	cd build
+	cmake ..
+	make -j`nproc`
+fi
 
 
 # autoref consensus
 go get -u github.com/RoboCup-SSL/ssl-autoref-consensus
 
 # ssl-status-board
+go get -u github.com/RoboCup-SSL/ssl-status-board-server
 go get -u github.com/RoboCup-SSL/ssl-status-board-server/ssl-status-board-proxy
 
 # autorefs
