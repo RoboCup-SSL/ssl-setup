@@ -38,20 +38,22 @@ mkdir -p ~/git
 cd ~/git
 if [ ! -d ssl-vision ]; then
 	git clone http://github.com/RoboCup-SSL/ssl-vision.git
-	cd ssl-vision
-	./InstallPackagesUbuntu.sh
-	make -j`nproc`
 fi
+cd ssl-vision
+git pull
+./InstallPackagesUbuntu.sh
+make -j`nproc`
 
 # ssl-refbox
 mkdir -p ~/git
 cd ~/git
 if [ ! -d ssl-refbox ]; then
 	git clone http://github.com/RoboCup-SSL/ssl-refbox.git
-	cd ssl-refbox
-	sudo ./installDeps.sh
-	make -j`nproc`
 fi
+cd ssl-refbox
+git pull
+sudo ./installDeps.sh
+make -j`nproc`
 
 # ssl-logtools
 sudo apt install -y libboost-program-options-dev
@@ -59,12 +61,13 @@ mkdir -p ~/git
 cd ~/git
 if [ ! -d ssl-logtools ]; then
 	git clone https://github.com/RoboCup-SSL/ssl-logtools.git
-	cd ssl-logtools
-	mkdir build
-	cd build
-	cmake ..
-	make -j`nproc`
 fi
+cd ssl-logtools
+git pull
+mkdir -p build
+cd build
+cmake ..
+make -j`nproc`
 
 
 # autoref consensus
@@ -74,15 +77,19 @@ go get -u github.com/RoboCup-SSL/ssl-autoref-consensus
 go get -u github.com/RoboCup-SSL/ssl-status-board-server
 go get -u github.com/RoboCup-SSL/ssl-status-board-server/ssl-status-board-proxy
 
+# ssl recorder
+go get -u github.com/RoboCup-SSL/ssl-go-tools/ssl-recorder
+
 # autorefs
 mkdir -p ~/git
 cd ~/git
 if [ ! -d ssl-autorefs ]; then
 	git clone http://github.com/RoboCup-SSL/ssl-autorefs.git
-	cd ssl-autorefs
-	sudo ./installDeps.sh
-	./buildAll.sh
 fi
+cd ssl-autorefs
+git pull
+sudo ./installDeps.sh
+./buildAll.sh
 
 # setting up chrony
 # accept all IPv4 connections
