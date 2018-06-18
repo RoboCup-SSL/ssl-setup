@@ -88,6 +88,7 @@ if [ ! -d ssl-autorefs ]; then
 fi
 cd ssl-autorefs
 git pull
+git submodule update
 sudo ./installDeps.sh
 ./buildAll.sh
 
