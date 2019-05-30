@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will bootstrap a fresh Ubuntu 16.04 LTS installation with the latest ssl software
+# This script will bootstrap a fresh Ubuntu 18.04 LTS installation with the latest ssl software
 # You will have to confirm some steps manually, as this script has no control over some installation scripts
 
 # exit on failures
@@ -25,14 +25,6 @@ if [ -z "`grep GOPATH ~/.bashrc`" ]; then
 	. ~/.bashrc
 fi
 
-# blue fox camera support
-# The links below may not work (e.g. version changed in the mean time). You can download the software manually:
-# https://www.matrix-vision.com/software-drivers-en.html
-#wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/install_mvBlueFOX.sh -O install_mvBlueFOX.sh
-#wget https://www.matrix-vision.com/software-drivers-en.html?file=tl_files/mv11/support/mvIMPACT_Acquire/01/mvBlueFOX-x86_64_ABI2-2.26.0.tgz -O mvBlueFOX-x86_64_ABI2-2.26.0.tgz
-#chmod +x install_mvBlueFOX.sh 
-#./install_mvBlueFOX.sh
-
 # ssl-vision
 mkdir -p ~/git
 cd ~/git
@@ -44,38 +36,8 @@ git pull
 ./InstallPackagesUbuntu.sh
 make -j`nproc`
 
-# ssl-refbox
-mkdir -p ~/git
-cd ~/git
-if [ ! -d ssl-refbox ]; then
-	git clone http://github.com/RoboCup-SSL/ssl-refbox.git
-fi
-cd ssl-refbox
-git pull
-sudo ./installDeps.sh
-make -j`nproc`
-
-# ssl-logtools
-sudo apt install -y libboost-program-options-dev
-mkdir -p ~/git
-cd ~/git
-if [ ! -d ssl-logtools ]; then
-	git clone https://github.com/RoboCup-SSL/ssl-logtools.git
-fi
-cd ssl-logtools
-git pull
-mkdir -p build
-cd build
-cmake ..
-make -j`nproc`
-
-
-# autoref consensus
-go get -u github.com/RoboCup-SSL/ssl-autoref-consensus
-
 # ssl-status-board
-go get -u github.com/RoboCup-SSL/ssl-status-board-server
-go get -u github.com/RoboCup-SSL/ssl-status-board-server/ssl-status-board-proxy
+go get -u github.com/RoboCup-SSL/ssl-status-board-server/...
 
 # ssl recorder
 go get -u github.com/RoboCup-SSL/ssl-go-tools/ssl-recorder
