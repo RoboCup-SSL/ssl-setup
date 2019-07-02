@@ -8,6 +8,10 @@ set -e
 # print commands
 set -x
 
+
+# determine current script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 # references
 # https://github.com/Robocup-SSL
 
@@ -48,7 +52,7 @@ cd ..
 make -j`nproc`
 
 mkdir -p ~/.config/autostart
-cp Vision.desktop ~/.config/autostart/
+cp $SCRIPT_DIR/Vision.desktop ~/.config/autostart/
 
 # setting up chrony
 # accept all IPv4 connections
