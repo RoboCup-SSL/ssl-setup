@@ -26,7 +26,7 @@ if [ ! -d ssl-vision ]; then
 fi
 cd ssl-vision
 git pull
-./InstallPackagesUbuntu.sh
+sudo ./InstallPackagesUbuntu.sh
 make -j`nproc`
 
 # setting up chrony
