@@ -47,6 +47,9 @@ cmake -DUSE_SPINNAKER=true ..
 cd ..
 make -j`nproc`
 
+mkdir -p ~/.config/autostart
+cp Vision.desktop ~/.config/autostart/
+
 # setting up chrony
 # accept all IPv4 connections
 sudo sed -ie 's/#allow 0\/0/allow 0\/0/' /etc/chrony/chrony.conf

@@ -1,3 +1,2 @@
 #!/bin/bash
-cd ~/git/ssl-vision
-bin/vision -s
+terminator -x cd ~/git/ssl-vision\; bin/vision -s\; read
