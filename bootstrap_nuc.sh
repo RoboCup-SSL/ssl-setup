@@ -21,6 +21,17 @@ sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-serve
 sudo sed -ie 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.usbfs_memory_mb=1000"/' /etc/default/grub
 sudo update-grub
 
+if [[ -f "spinnaker-1.23.0.27-amd64-Ubuntu18.04-pkg.tar.gz" ]]; then
+	if [[ ! -d "spinnaker-1.23.0.27-amd64" ]]; then
+		tar xf "spinnaker-1.23.0.27-amd64-Ubuntu18.04-pkg.tar.gz"
+		cd spinnaker-1.23.0.27-amd64
+		./install_spinnaker.sh
+	fi
+else
+	echo "Put the spinnaker SDK to the ssl-config dir"
+	exit 1
+fi
+
 # ssl-vision
 mkdir -p ~/git
 cd ~/git
