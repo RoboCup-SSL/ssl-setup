@@ -18,6 +18,9 @@ sudo apt -y dist-upgrade
 # install some common dependencies
 sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server
 
+sudo sed -ie 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.usbfs_memory_mb=1000"/' /etc/default/grub
+sudo update-grub
+
 # ssl-vision
 mkdir -p ~/git
 cd ~/git
