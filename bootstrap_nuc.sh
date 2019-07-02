@@ -16,7 +16,7 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator git chrony net-tools
+sudo apt install -y vim terminator git chrony net-tools vnc4server
 
 # ssl-vision
 mkdir -p ~/git
