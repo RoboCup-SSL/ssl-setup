@@ -16,7 +16,7 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator git chrony net-tools vnc4server
+sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server
 
 # ssl-vision
 mkdir -p ~/git
@@ -27,6 +27,10 @@ fi
 cd ssl-vision
 git pull
 sudo ./InstallPackagesUbuntu.sh
+mkdir -p build
+cd build
+cmake -DUSE_SPINNAKER=true ..
+cd ..
 make -j`nproc`
 
 # setting up chrony
