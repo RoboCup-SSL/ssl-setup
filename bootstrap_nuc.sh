@@ -56,3 +56,9 @@ sudo systemctl restart chrony.service
 echo "TODO you have to select one computer as the chrony server and add the IP to all other computers in /etc/chrony/chrony.conf as 'server 192.168.178.51'"
 read
 
+echo -n "Enter hostname or keep empty"
+read hostname
+if [[ -n "$hostname" ]]; then
+	echo "$hostname" | sudo tee /etc/hostname
+	echo "Set hostname to $hostname"
+fi
