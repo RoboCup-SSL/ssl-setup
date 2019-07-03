@@ -1,0 +1,7 @@
+[Unit]
+description=Launches SSL Game Controller Server
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/ssl-game-controller
+Restart=always

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=start-match
+Comment=
+Exec=/home/ssl/.local/bin/start-match
+Icon=/home/ssl/.local/share/start-match-icon.png
+Terminal=false
+Type=Application

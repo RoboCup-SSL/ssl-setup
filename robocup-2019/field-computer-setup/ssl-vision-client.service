@@ -1,0 +1,7 @@
+[Unit]
+description=Start ssl-vision-client
+
+[Service]
+Type=simple
+ExecStart=%h/go/bin/ssl-vision-client
+Restart=always
