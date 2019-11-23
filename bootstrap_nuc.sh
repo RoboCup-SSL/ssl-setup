@@ -20,7 +20,10 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server
+sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server xserver-xorg-video-dummy-hwe-18.04
+
+sudo cp xorg.conf /usr/share/X11/xorg.conf.d/xorg.conf
+
 
 sudo sed -ie 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.usbfs_memory_mb=1000"/' /etc/default/grub
 sudo update-grub
@@ -47,7 +50,7 @@ git pull
 sudo ./InstallPackagesUbuntu.sh
 mkdir -p build
 cd build
-cmake -DUSE_SPINNAKER=true ..
+cmake -DUSE_SPINNAKER=true -DUSE_QT5=true ..
 cd ..
 make -j`nproc`
 
