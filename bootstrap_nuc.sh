@@ -52,10 +52,10 @@ mkdir -p build
 cd build
 cmake -DUSE_SPINNAKER=true -DUSE_QT5=true ..
 cd ..
-make -j`nproc`
+make -j "$(nproc)"
 
 mkdir -p ~/.config/autostart
-cp $SCRIPT_DIR/Vision.desktop ~/.config/autostart/
+cp "$SCRIPT_DIR/Vision.desktop" ~/.config/autostart/
 
 # setting up chrony
 # accept all IPv4 connections
@@ -64,10 +64,10 @@ sudo sed -ie 's/#allow 0\/0/allow 0\/0/' /etc/chrony/chrony.conf
 sudo sed -ie 's/#local stratum/local stratum/' /etc/chrony/chrony.conf
 sudo systemctl restart chrony.service
 echo "TODO you have to select one computer as the chrony server and add the IP to all other computers in /etc/chrony/chrony.conf as 'server 192.168.178.51'"
-read
+read -r
 
 echo -n "Enter hostname or keep empty"
-read hostname
+read -r hostname
 if [[ -n "$hostname" ]]; then
 	echo "$hostname" | sudo tee /etc/hostname
 	echo "Set hostname to $hostname"
