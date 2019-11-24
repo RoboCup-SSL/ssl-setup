@@ -22,7 +22,7 @@ sudo apt -y dist-upgrade
 # install some common dependencies
 sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server xserver-xorg-video-dummy-hwe-18.04 qt5-default
 
-sudo cp xorg.conf /usr/share/X11/xorg.conf.d/xorg.conf
+sudo cp 90-dummy-monitor.conf /usr/share/X11/xorg.conf.d/90-dummy-monitor.conf
 
 
 sudo sed -ie 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash usbcore.usbfs_memory_mb=1000"/' /etc/default/grub
