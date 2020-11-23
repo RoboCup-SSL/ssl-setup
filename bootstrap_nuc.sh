@@ -20,7 +20,7 @@ sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server xserver-xorg-video-dummy-hwe-18.04 qt5-default
+sudo apt install -y vim terminator git chrony net-tools vnc4server openssh-server xserver-xorg-video-dummy-hwe-18.04 qt5-default linux-lowlatency-hwe-18.04
 
 sudo cp 90-dummy-monitor.conf /usr/share/X11/xorg.conf.d/90-dummy-monitor.conf
 
