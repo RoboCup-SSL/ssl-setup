@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# This script will bootstrap a fresh Ubuntu 18.04 LTS installation with the latest ssl software
-# You will have to confirm some steps manually, as this script has no control over some installation scripts
-
 # exit on failures
-set -e
+set -euo pipefail
 # print commands
 set -x
+# determine current script directory
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-# references
-# https://github.com/Robocup-SSL
 
 # update system
 sudo apt -y update
 sudo apt -y dist-upgrade
 
 # install some common dependencies
-sudo apt install -y vim terminator openjdk-8-jdk maven git golang chrony net-tools
+sudo apt install -y vim terminator openjdk-8-jdk git golang chrony net-tools
 
 # setup GO
-if [ -z "`grep GOPATH ~/.bashrc`" ]; then
+if ! grep -q GOPATH ~/.bashrc; then
 	echo "export GOPATH=~/go" >> ~/.bashrc
 	echo "export PATH=\$GOPATH/bin:\$PATH" >> ~/.bashrc
 	. ~/.bashrc
 fi
 
-# ssl-vision
+# Clone and build ssl-vision without Spinnaker (mainly for graphical client)
 mkdir -p ~/git
 cd ~/git
 if [ ! -d ssl-vision ]; then
@@ -34,7 +31,11 @@ fi
 cd ssl-vision
 git pull
 ./InstallPackagesUbuntu.sh
-make -j`nproc`
+mkdir -p build
+cd build
+cmake -DUSE_QT5=true ..
+cd ..
+make -j "$(nproc)"
 
 # ssl-status-board
 go get -u github.com/RoboCup-SSL/ssl-status-board-server/...
@@ -55,11 +56,4 @@ sudo ./installDeps.sh
 ./buildAll.sh
 
 # setting up chrony
-# accept all IPv4 connections
-sudo sed -ie 's/#allow 0\/0/allow 0\/0/' /etc/chrony/chrony.conf
-# server time even if unsynchronized
-sudo sed -ie 's/#local stratum/local stratum/' /etc/chrony/chrony.conf
-sudo systemctl restart chrony.service
-echo "TODO you have to select one computer as the chrony server and add the IP to all other computers in /etc/chrony/chrony.conf as 'server 192.168.178.51'"
-read
-
+./"${SCRIPT_DIR}"/bootstrap_chrony.sh
