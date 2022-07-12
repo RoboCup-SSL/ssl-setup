@@ -42,17 +42,17 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y nodejs
 
 figlet "SSL Log Tools"
-go get -u github.com/RoboCup-SSL/ssl-go-tools/...
+go install -u github.com/RoboCup-SSL/ssl-go-tools/...@latest
 
 figlet "SSL Vision Client"
 
-go get -u github.com/RoboCup-SSL/ssl-vision-client/...
+go install -u github.com/RoboCup-SSL/ssl-vision-client/...@latest
 pushd $GOPATH/src/github.com/RoboCup-SSL/ssl-vision-client
 go build cmd/ssl-vision-client/main.go
 npm install
 npm run build
 
-go get github.com/gobuffalo/packr/packr
+go install github.com/gobuffalo/packr/packr@latest
 cd cmd/ssl-vision-client
 packr install
 popd
