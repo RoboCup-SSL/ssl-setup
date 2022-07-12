@@ -16,9 +16,8 @@ figlet "Installing apt packages"
 sudo apt install -y git cmake build-essential tmux emacs vim curl terminator
 
 figlet "Go"
-sudo add-apt-repository -y ppa:gophers/archive
 sudo apt update
-sudo apt install -y golang-1.11-go
+sudo snap install go --classic
 
 GOPATH_BASHRC='export GOPATH=$HOME/go'
 if ! grep -Fxq "$GOPATH_BASHRC" ~/.bashrc; then
