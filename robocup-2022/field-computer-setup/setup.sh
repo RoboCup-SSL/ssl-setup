@@ -15,7 +15,7 @@ figlet "Installing apt packages"
 sudo apt install -y git cmake build-essential tmux emacs vim curl terminator
 
 figlet "Go"
-sudo snap install go --classic
+sudo apt install golang-go
 
 GOPATH_BASHRC='export GOPATH=$HOME/go'
 if ! grep -Fxq "$GOPATH_BASHRC" ~/.bashrc; then
@@ -30,7 +30,7 @@ eval "$GOPATH_BASHRC"
 eval "$GO_BIN_BASHRC"
 
 figlet "SSL Log Tools"
-go install github.com/RoboCup-SSL/ssl-go-tools/...@latest
+go get -u github.com/RoboCup-SSL/ssl-go-tools/...
 
 figlet "SSL Vision Client"
 curl -L -o ~/.local/bin/ssl-vision-client https://github.com/RoboCup-SSL/ssl-vision-client/releases/download/v1.6.0/ssl-vision-client_v1.6.0_linux_amd64

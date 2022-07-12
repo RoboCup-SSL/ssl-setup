@@ -29,6 +29,7 @@ game:
       defense-area-width: 3.6
       penalty-kick-dist-to-goal: 8
       goal-width: 1.8
+      center-circle-radius: 0.5
       placement-offset-touch-line: 0.2
       placement-offset-goal-line: 0.2
       placement-offset-goal-line-goal-kick: 1
@@ -40,6 +41,7 @@ game:
       defense-area-width: 2
       penalty-kick-dist-to-goal: 6
       goal-width: 1
+      center-circle-radius: 0.5
       placement-offset-touch-line: 0.2
       placement-offset-goal-line: 0.2
       placement-offset-goal-line-goal-kick: 1
@@ -60,7 +62,7 @@ game:
     DIV_B: 10s
   ball-placement-time: 30s
   ball-placement-time-top-up: 10s
-  state-store-file: /config/state-store.json.stream
+  state-store-file: state-store.json.stream
   ball-placement-required-distance: 1
   ball-placement-min-distance-to-defense-area: 0.7
   ball-placement-tolerance: 0.15
