@@ -15,26 +15,26 @@ figlet "Installing apt packages"
 
 sudo apt install -y git cmake build-essential tmux emacs vim curl terminator
 
-# figlet "Go"
-# sudo apt update
-# sudo snap install go --classic
+figlet "Go"
+sudo apt update
+sudo snap install go --classic
 
-# GOPATH_BASHRC='export GOPATH=$HOME/go'
-# if ! grep -Fxq "$GOPATH_BASHRC" ~/.bashrc; then
-#     echo "$GOPATH_BASHRC" >> ~/.bashrc
-# fi
-# GO_BIN_BASHRC='export PATH=$GOPATH/bin:$PATH'
-# if ! grep -Fxq "$GO_BIN_BASHRC" ~/.bashrc; then
-#     echo "$GO_BIN_BASHRC" >> ~/.bashrc
-# fi
-# GO_BASHRC='export PATH=/usr/lib/go-1.11/bin:$PATH'
-# if ! grep -Fxq "$GO_BASHRC" ~/.bashrc; then
-#     echo "$GO_BASHRC" >> ~/.bashrc
-# fi
+GOPATH_BASHRC='export GOPATH=$HOME/go'
+if ! grep -Fxq "$GOPATH_BASHRC" ~/.bashrc; then
+    echo "$GOPATH_BASHRC" >> ~/.bashrc
+fi
+GO_BIN_BASHRC='export PATH=$GOPATH/bin:$PATH'
+if ! grep -Fxq "$GO_BIN_BASHRC" ~/.bashrc; then
+    echo "$GO_BIN_BASHRC" >> ~/.bashrc
+fi
+GO_BASHRC='export PATH=/usr/lib/go-1.11/bin:$PATH'
+if ! grep -Fxq "$GO_BASHRC" ~/.bashrc; then
+    echo "$GO_BASHRC" >> ~/.bashrc
+fi
 
-# eval "$GOPATH_BASHRC"
-# eval "$GO_BIN_BASHRC"
-# eval "$GO_BASHRC"
+eval "$GOPATH_BASHRC"
+eval "$GO_BIN_BASHRC"
+eval "$GO_BASHRC"
 
 
 # figlet "Nodejs"
@@ -67,21 +67,21 @@ mkdir -p ~/.local/bin
 curl -sSL https://github.com/RoboCup-SSL/ssl-game-controller/releases/download/v2.16.1/ssl-game-controller_v2.16.1_linux_amd64 > ~/.local/bin/ssl-game-controller
 chmod +x ~/.local/bin/ssl-game-controller
 
-# figlet "SSL Logtools"
+figlet "SSL Logtools"
 
-# sudo add-apt-repository -y ppa:maarten-fonville/protobuf
-# sudo apt install -y libqt4-dev libboost-all-dev libboost-program-options-dev protobuf-compiler libprotobuf-dev
+sudo apt install -y qtbase5-dev libboost-all-dev libboost-program-options-dev protobuf-compiler libprotobuf-dev
 
-# if [[ ! -d ~/ssl-logtools ]]; then
-#     git clone https://github.com/RoboCup-SSL/ssl-logtools.git
-# fi
-# pushd ~/ssl-logtools
-# mkdir -p build
-# cd build
-# cmake ..
-# make -j
-# mv bin/* ~/.local/bin/
-# popd
+if [[! -d ~/ssl-logtools]]; then
+    git clone https://github.com/RoboCup-SSL/ssl-logtools.git
+fi
+
+pushd ~/ssl-logtools
+mkdir -p build
+cd build
+cmake ..
+make -j
+mv bin/* ~/.local/bin/
+popd
 
 figlet "SSL Autorefs"
 
@@ -90,6 +90,7 @@ sudo apt install -y libeigen3-dev libjemalloc-dev
 if [[ ! -d ~/ssl-autorefs ]]; then
     git clone --recursive -b robocup2022 https://github.com/RoboCup-SSL/ssl-autorefs.git
 fi
+
 pushd ~/ssl-autorefs
 sudo ./installDeps.sh
 ./buildAll.sh
