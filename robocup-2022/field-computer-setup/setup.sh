@@ -2,7 +2,7 @@
 set -eu
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd $HOME
+cd "$HOME"
 
 sudo apt update && sudo apt upgrade -y
 
@@ -27,14 +27,9 @@ GO_BIN_BASHRC='export PATH=$GOPATH/bin:$PATH'
 if ! grep -Fxq "$GO_BIN_BASHRC" ~/.bashrc; then
     echo "$GO_BIN_BASHRC" >> ~/.bashrc
 fi
-GO_BASHRC='export PATH=/usr/lib/go-1.11/bin:$PATH'
-if ! grep -Fxq "$GO_BASHRC" ~/.bashrc; then
-    echo "$GO_BASHRC" >> ~/.bashrc
-fi
 
 eval "$GOPATH_BASHRC"
 eval "$GO_BIN_BASHRC"
-eval "$GO_BASHRC"
 
 
 # figlet "Nodejs"
@@ -71,7 +66,7 @@ figlet "SSL Logtools"
 
 sudo apt install -y qtbase5-dev libboost-all-dev libboost-program-options-dev protobuf-compiler libprotobuf-dev
 
-if [[! -d ~/ssl-logtools]]; then
+if [[ ! -d ~/ssl-logtools ]]; then
     git clone https://github.com/RoboCup-SSL/ssl-logtools.git
 fi
 
@@ -100,28 +95,30 @@ figlet "Install systemd services"
 mkdir -p ~/.local/share/systemd/user
 
 if [[ ! -f ~/.local/share/systemd/user/ssl-game-controller.service ]]; then
-    read -p "Do you want to start ssl-game-controller at startup? (y/N) " choice
+    read -r -p "Do you want to start ssl-game-controller at startup? (y/N) " choice
     case "$choice" in
-	y|Y )     cp $SCRIPT_DIR/ssl-game-controller-boot.service ~/.local/share/systemd/user/ssl-game-controller.service
+	y|Y )     cp "$SCRIPT_DIR/ssl-game-controller-boot.service" ~/.local/share/systemd/user/ssl-game-controller.service
 		  systemctl --user daemon-reload
-		  systemctl --user enable ssl-game-controller.service;;
-        * )     cp $SCRIPT_DIR/ssl-game-controller.service ~/.local/share/systemd/user/ssl-game-controller.service
+		  systemctl --user enable ssl-game-controller.service
+		  systemctl --user start ssl-game-controller.service;;
+        * )     cp "$SCRIPT_DIR/ssl-game-controller.service" ~/.local/share/systemd/user/ssl-game-controller.service
 		systemctl --user daemon-reload;;
     esac
 fi
 
 if [[ ! -f ~/.local/share/systemd/user/ssl-vision-client.service ]]; then
-    read -p "Do you want to start ssl-vision-client at startup? (y/N) " choice
+    read -r -p "Do you want to start ssl-vision-client at startup? (y/N) " choice
     case "$choice" in
-	y|Y ) cp $SCRIPT_DIR/ssl-vision-client-boot.service ~/.local/share/systemd/user/ssl-vision-client.service
+	y|Y ) cp "$SCRIPT_DIR/ssl-vision-client-boot.service" ~/.local/share/systemd/user/ssl-vision-client.service
 	      systemctl --user daemon-reload
-	      systemctl --user enable ssl-vision-client.service;;
-	* ) cp $SCRIPT_DIR/ssl-vision-client.service ~/.local/share/systemd/user/ssl-vision-client.service
+	      systemctl --user enable ssl-vision-client.service
+	      systemctl --user start ssl-vision-client.service;;
+	* ) cp "$SCRIPT_DIR/ssl-vision-client.service" ~/.local/share/systemd/user/ssl-vision-client.service
 	    systemctl --user daemon-reload;;
     esac
 fi
 
-cp $SCRIPT_DIR/start-match.sh ~/.local/bin/start-match
+cp "$SCRIPT_DIR/start-match.sh" ~/.local/bin/start-match
 chmod +x ~/.local/bin/start-match
-cp $SCRIPT_DIR/icon.png ~/.local/share/start-match-icon.png
-cp $SCRIPT_DIR/start-match.desktop ~/Desktop/
+cp "$SCRIPT_DIR/icon.png" ~/.local/share/start-match-icon.png
+cp "$SCRIPT_DIR/start-match.desktop" ~/Desktop/
