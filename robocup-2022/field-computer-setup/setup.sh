@@ -46,7 +46,7 @@ go install github.com/RoboCup-SSL/ssl-go-tools/...@latest
 figlet "SSL Vision Client"
 
 go install github.com/RoboCup-SSL/ssl-vision-client/...@latest
-pushd $GOPATH/go/pkg/mod/github.com/!robo!cup-!s!s!l/ssl-vision-client
+pushd "~/go/pkg/mod/github.com/\!robo\!cup-\!s\!s\!l/ssl-vision-client"
 go build cmd/ssl-vision-client/main.go
 sudo apt install npm -y
 npm install
