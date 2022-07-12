@@ -1,7 +1,12 @@
 [Unit]
 description=Start ssl-vision-client
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 Type=simple
 ExecStart=%h/go/bin/ssl-vision-client
 Restart=always
+
+[Install]
+WantedBy=default.target
