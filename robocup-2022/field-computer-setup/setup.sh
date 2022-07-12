@@ -15,24 +15,6 @@ figlet "Installing apt packages"
 
 sudo apt install -y git cmake build-essential tmux emacs vim curl terminator
 
-figlet "Rust"
-
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-CARGO_BASHRC='source $HOME/.cargo/env'
-if ! grep -Fxq "$CARGO_BASHRC" ~/.bashrc; then
-    echo "$CARGO_BASHRC" >> ~/.bashrc
-fi
-
-figlet "Rust Tools"
-source ~/.cargo/env
-if ! which rg; then
-    cargo install ripgrep
-fi
-if ! which bat; then
-    cargo install bat
-fi
-
 figlet "Go"
 sudo add-apt-repository -y ppa:gophers/archive
 sudo apt update
