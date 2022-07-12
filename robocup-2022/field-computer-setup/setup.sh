@@ -38,17 +38,17 @@ eval "$GO_BASHRC"
 
 
 figlet "Nodejs"
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+#curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt install -y nodejs
 
 figlet "SSL Log Tools"
-go install -u github.com/RoboCup-SSL/ssl-go-tools/...@latest
-
+go install github.com/RoboCup-SSL/ssl-go-tools/...@latest
 figlet "SSL Vision Client"
 
-go install -u github.com/RoboCup-SSL/ssl-vision-client/...@latest
-pushd $GOPATH/src/github.com/RoboCup-SSL/ssl-vision-client
+go install github.com/RoboCup-SSL/ssl-vision-client/...@latest
+pushd $GOPATH/go/pkg/mod/github.com/!robo!cup-!s!s!l/ssl-vision-client
 go build cmd/ssl-vision-client/main.go
+sudo apt install npm -y
 npm install
 npm run build
 
