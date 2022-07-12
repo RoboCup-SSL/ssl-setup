@@ -83,7 +83,7 @@ if ! grep -Fxq "$LOCAL_BIN_BASHRC" ~/.bashrc; then
 fi
 
 mkdir -p ~/.local/bin
-curl -sSL https://github.com/RoboCup-SSL/ssl-game-controller/releases/download/v1.1.1/ssl-game-controller_v1.1.1_linux_amd64 > ~/.local/bin/ssl-game-controller
+curl -sSL https://github.com/RoboCup-SSL/ssl-game-controller/releases/download/v2.16.1/ssl-game-controller_v2.16.1_linux_amd64 > ~/.local/bin/ssl-game-controller
 chmod +x ~/.local/bin/ssl-game-controller
 
 figlet "SSL Logtools"
@@ -107,7 +107,7 @@ figlet "SSL Autorefs"
 sudo apt install -y libeigen3-dev libjemalloc-dev
 
 if [[ ! -d ~/ssl-autorefs ]]; then
-    git clone --recursive https://github.com/RoboCup-SSL/ssl-autorefs.git
+    git clone --recursive -b robocup2022 https://github.com/RoboCup-SSL/ssl-autorefs.git
 fi
 pushd ~/ssl-autorefs
 sudo ./installDeps.sh
