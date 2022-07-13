@@ -30,7 +30,7 @@ eval "$GOPATH_BASHRC"
 eval "$GO_BIN_BASHRC"
 
 figlet "SSL Log Tools"
-go get -u github.com/RoboCup-SSL/ssl-go-tools/...
+go install github.com/RoboCup-SSL/ssl-go-tools/...@latest
 
 figlet "SSL Vision Client"
 curl -L -o ~/.local/bin/ssl-vision-client https://github.com/RoboCup-SSL/ssl-vision-client/releases/download/v1.6.0/ssl-vision-client_v1.6.0_linux_amd64
@@ -73,6 +73,20 @@ y | Y)
   ;;
 *)
   cp "$SCRIPT_DIR/ssl-game-controller.service" ~/.local/share/systemd/user/ssl-game-controller.service
+  systemctl --user daemon-reload
+  ;;
+esac
+
+read -r -p "Do you want to start ssl-auto-recorder at startup? (y/N) " choice
+case "$choice" in
+y | Y)
+  cp "$SCRIPT_DIR/ssl-auto-recorder.service" ~/.local/share/systemd/user/ssl-auto-recorder.service
+  systemctl --user daemon-reload
+  systemctl --user enable ssl-auto-recorder.service
+  systemctl --user start ssl-auto-recorder.service
+  ;;
+*)
+  cp "$SCRIPT_DIR/ssl-auto-recorder.service" ~/.local/share/systemd/user/ssl-auto-recorder.service
   systemctl --user daemon-reload
   ;;
 esac

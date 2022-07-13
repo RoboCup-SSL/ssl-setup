@@ -1,0 +1,5 @@
+alias gamecontroller-status='systemctl --user status ssl-game-controller.service'
+alias gamecontroller-restart='systemctl --user restart ssl-game-controller.service'
+
+alias autorecorder-status='systemctl --user status ssl-auto-recorder.service'
+alias autorecorder-restart='systemctl --user restart ssl-auto-recorder.service'
