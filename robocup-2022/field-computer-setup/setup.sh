@@ -50,12 +50,18 @@ figlet "SSL Autorefs"
 if test ! -d "~/ssl-autorefs"
 then
   git clone --recursive -b robocup2022 https://github.com/RoboCup-SSL/ssl-autorefs.git
+  git submodule update --init
+  cd ~/ssl-autorefs/erforce
+  git pull origin master
+  cd ~/ssl-autorefs/tigers
+  git pull origin master
 else
     echo "Already downloaded!"
 fi
 
 
 cd ~/ssl-autorefs
+git 
 sudo ./installDeps.sh
 ./buildAll.sh
 cd ~/
