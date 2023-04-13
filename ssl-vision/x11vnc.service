@@ -1,0 +1,8 @@
+[Unit]
+Description=x11vnc-Server
+
+[Service]
+ExecStart=/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -o /var/log/x11vnc.log -rfbauth /etc/x11vnc.pass -rfbport 5900 -shared
+
+[Install]
+WantedBy=multi-user.target

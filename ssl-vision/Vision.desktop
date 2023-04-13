@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SSL-Vision
+Exec=bash -c "cd ~/ssl-vision && bin/vision -s; bash"
+Terminal=true

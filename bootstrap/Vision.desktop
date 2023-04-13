@@ -1,6 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=SSL-Vision
-Exec=/home/vision/git/ssl-config/start-vision.sh
-Terminal=false
