@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=start-match
 Comment=
-Exec=/home/robocup22/.local/bin/start-match
-Icon=/home/robocup22/.local/share/start-match-icon.png
+Exec=%h/.local/bin/start-match
+Icon=%h/.local/share/start-match-icon.png
 Terminal=false
 Type=Application
