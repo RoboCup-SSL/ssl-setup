@@ -10,4 +10,9 @@ sudo apt-get -y dist-upgrade
 echo
 echo "### Install some common dependencies"
 echo
-sudo apt-get install -y neovim git net-tools openssh-server
+sudo apt-get install -y neovim git net-tools openssh-server htop
+
+echo
+echo "### Remove unwanted dependencies"
+echo
+sudo apt-get remove -y xfce4-screensaver
