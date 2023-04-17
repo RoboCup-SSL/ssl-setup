@@ -22,7 +22,11 @@ see [ssl-vision](./ssl-vision/README.md)
 Run at least:
 
 ```shell
+# Configure Ubuntu
+./cli.sh configure_system
+# Install all apps
 ./cli.sh install_apps
+# Install systemd service for vision-client
 ./cli.sh install_systemd ssl-vision-client
 ```
 
@@ -30,6 +34,24 @@ Run at least:
 Install all:
 
 ```shell
+# Configure Ubuntu
+./cli.sh configure_system
+# Install all apps
 ./cli.sh install_apps
+# Install all systemd services
 ./cli.sh install_systemd
+```
+
+## Monitoring and Troubleshooting
+The following commands are available:
+
+```shell
+# List available apps
+./cli.sh apps
+
+# Start/Stop/Restart single or all apps
+./cli.sh start|stop|restart [app]
+
+# See logs of systemd services
+./cli.sh logs [app]
 ```

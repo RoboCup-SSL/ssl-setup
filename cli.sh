@@ -97,7 +97,21 @@ function uninstall_systemd() {
   fi
 }
 
+function configure_system() {
+  sudo apt update
+  sudo apt upgrade -y
+  which snap >/dev/null && sudo snap refresh
+  sudo apt install -y git neovim curl terminator remmina
+
+  echo "Disable screensaver"
+  which gsettings >/dev/null && gsettings set org.gnome.desktop.screensaver lock-enabled false
+}
+
 case $action in
+
+apps)
+  echo "Available apps: ${apps[*]}"
+  ;;
 
 status)
   systemctl --user status "${systemd_services[@]}"
@@ -122,6 +136,10 @@ logs)
     parameters+=("${unit}")
   done
   journalctl -r --user "${parameters[@]}"
+  ;;
+
+configure_system)
+  configure_system
   ;;
 
 install_apps)
