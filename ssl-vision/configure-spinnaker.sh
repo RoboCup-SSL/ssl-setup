@@ -31,5 +31,9 @@ readonly spinnaker_folder="${SCRIPT_DIR}/spinnaker-${spinnaker_version}-amd64"
 if [[ ! -d "${spinnaker_folder}" ]]; then
   tar xvf "${spinnaker_archive_path}" -C "${SCRIPT_DIR}"
   cd "${spinnaker_folder}"
+
+  echo
+  echo "### The Spinnaker SDK will now be installed. Simply let it install everything and add 'vision' to the group, when asked."
+  echo
   ./install_spinnaker.sh
 fi
