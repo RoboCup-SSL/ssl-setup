@@ -6,9 +6,11 @@ A tournament requires at least one field.
 Each field requires one or more computers.
 For an official RoboCup, the following computers must be set up:
 
-* Vision
-* Vision-Expert
-* Game-Controller
+* 1-2x Vision
+* 1x Vision-Expert
+* 1x Game-Controller
+* 1-2x Status-Board (RaspberryPi)
+* 2x Remote-Control (RaspberryPi)
 
 The computers should run a recent Ubuntu LTS version or one of it flavors.
 
@@ -41,6 +43,12 @@ Install all:
 # Install all systemd services
 ./cli.sh install_systemd
 ```
+
+### Status-Board
+See: https://github.com/RoboCup-SSL/ssl-status-board/blob/master/rpi/Readme.md
+
+### Remote-Control
+See: https://github.com/RoboCup-SSL/ssl-remote-control/blob/master/rpi/Readme.md
 
 ## Monitoring and Troubleshooting
 The following commands are available:
