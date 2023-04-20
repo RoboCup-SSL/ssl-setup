@@ -25,8 +25,15 @@ services:
       - ./ssl-auto-recorder/:/data:rw
 
   autoref-tigers:
-    image: tigersmannheim/auto-referee:0.13.0-9-g3703023
-    command: [ "-a", "-hl" ]
+    image: tigersmannheim/auto-referee-vnc:1.0.0
+    # Headless
+#    command: [ "-a", "-hl" ]
+    # With UI
+    command: [ "-a" ]
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
 
   autoref-erforce:
