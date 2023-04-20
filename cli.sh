@@ -6,9 +6,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
 readonly goos="linux"
 readonly goarch="amd64"
-readonly target_folder="$HOME/.local/bin"
+readonly binary_folder="$HOME/.local/bin"
 readonly config_folder="$HOME/.config"
 readonly systemd_folder="$HOME/.local/share/systemd/user"
+readonly autoref_folder="$HOME/.local/share/auto-referees"
 declare -A app_repo_map
 app_repo_map["ssl-game-controller"]="ssl-game-controller"
 app_repo_map["ssl-ref-client"]="ssl-game-controller"
@@ -32,25 +33,26 @@ if [[ -n "${param_app}" ]]; then
 fi
 
 function latest_version() {
-  local -r repo="$1"
-  curl -s "https://api.github.com/repos/RoboCup-SSL/${repo}/releases/latest" | jq -r '.tag_name'
+  local -r org="$1"
+  local -r repo="$2"
+  curl -s "https://api.github.com/repos/${org}/${repo}/releases/latest" | jq -r '.tag_name'
 }
 
 function install_app() {
   local -r app="$1"
   local repo="${app_repo_map[${app}]}"
   local version
-  version="$(latest_version "${repo}")"
+  version="$(latest_version "RoboCup-SSL" "${repo}")"
   echo "Latest version of ${app} from ${repo} is ${version}"
-  binary_name="${app}_${version}_${goos}_${goarch}"
-  binary_path="${target_folder}/${binary_name}"
+  local binary_name="${app}_${version}_${goos}_${goarch}"
+  local binary_path="${binary_folder}/${binary_name}"
   if [[ ! -f "${binary_path}" ]]; then
     echo "Downloading ${binary_name}"
-    mkdir -p "${target_folder}"
-    curl --location --silent "https://github.com/RoboCup-SSL/${repo}/releases/download/${version}/${binary_name}" --output "${binary_path}"
+    mkdir -p "${binary_folder}"
+    curl --location --fail --silent "https://github.com/RoboCup-SSL/${repo}/releases/download/${version}/${binary_name}" --output "${binary_path}"
     chmod +x "${binary_path}"
-    rm -f "${target_folder}/${app}"
-    (cd "${target_folder}" && ln -s "${binary_name}" "${app}")
+    rm -f "${binary_folder}/${app}"
+    (cd "${binary_folder}" && ln -s "${binary_name}" "${app}")
   fi
 }
 
@@ -59,8 +61,8 @@ function uninstall_app() {
 
   echo "Uninstall app ${app}"
   uninstall_systemd "${app}"
-  rm -f "${target_folder}/${app}"
-  rm -f "${target_folder}/${app}_"*
+  rm -f "${binary_folder}/${app}"
+  rm -f "${binary_folder}/${app}_"*
 }
 
 function install_systemd() {
@@ -95,6 +97,38 @@ function uninstall_systemd() {
     systemctl --user reset-failed
     rm -f "${systemd_folder}/${app}.service"
   fi
+}
+
+function install_autoref_tigers() {
+  local -r repo="AutoReferee"
+  local version
+  version_tag="$(latest_version "TIGERs-Mannheim" "${repo}")"
+  version="${version_tag#version/*}"
+  echo "Latest version of ${repo} is ${version}"
+set -x
+  mkdir -p "${autoref_folder}"
+  local archive_name="autoReferee.zip"
+  local archive_path="${autoref_folder}/autoReferee-${version}.zip"
+
+  if [[ ! -f "${archive_path}" ]]; then
+    echo "Downloading ${archive_name}"
+    mkdir -p "${autoref_folder}"
+    curl --location --fail --silent "https://github.com/TIGERs-Mannheim/${repo}/releases/download/${version_tag}/${archive_name}" --output "${archive_path}"
+    echo "Unzipping ${archive_path}"
+    unzip "${archive_path}" -d "${autoref_folder}"
+    mv "${autoref_folder}/autoReferee" "${autoref_folder}/autoReferee-${version}"
+    (cd "${autoref_folder}" && ln -s "autoReferee-${version}" "autoReferee")
+    cat << EOF > "${binary_folder}/auto-referee-tigers"
+#!/usr/bin/env bash
+cd "${autoref_folder}/autoReferee"
+bin/autoReferee "\$@"
+EOF
+    chmod +x "${binary_folder}/auto-referee-tigers"
+  fi
+}
+
+function uninstall_autoref_tigers() {
+  rm -rf "${autoref_folder}/autoReferee"*
 }
 
 function configure_system() {
@@ -164,6 +198,14 @@ uninstall_systemd)
   for a in "${systemd_services[@]}"; do
     uninstall_systemd "${a}"
   done
+  ;;
+
+install_autoref_tigers)
+  install_autoref_tigers
+  ;;
+
+uninstall_autoref_tigers)
+  uninstall_autoref_tigers
   ;;
 
 *)

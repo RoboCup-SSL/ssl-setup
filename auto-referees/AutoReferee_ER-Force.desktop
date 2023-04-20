@@ -1,5 +1,4 @@
 [Desktop Entry]
-Version=1.0
 Type=Application
 Name=AutoRef Erforce
 Exec=bash -c 'cd /home/robocup/git/ssl-autorefs/ && ./run_erforce.sh'
