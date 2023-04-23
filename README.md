@@ -43,7 +43,7 @@ Install all:
 # Install all systemd services
 ./cli.sh install_systemd
 # Install autorefs
-./cli.sh install_autoref_tigers
+./cli.sh install_autorefs
 ```
 
 ### Status-Board

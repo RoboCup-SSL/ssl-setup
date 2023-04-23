@@ -10,4 +10,4 @@ jobs:
       - run: ./cli.sh configure_system
       - run: ./cli.sh install_apps
       - run: ./cli.sh install_systemd
-      - run: ./cli.sh install_autoref_tigers
+      - run: ./cli.sh install_autorefs

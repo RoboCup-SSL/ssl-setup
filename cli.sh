@@ -99,6 +99,10 @@ function uninstall_systemd() {
   fi
 }
 
+function install_autorefs() {
+  install_autoref_tigers
+}
+
 function install_autoref_tigers() {
   local -r repo="AutoReferee"
   local version
@@ -201,6 +205,10 @@ uninstall_systemd)
   for a in "${systemd_services[@]}"; do
     uninstall_systemd "${a}"
   done
+  ;;
+
+install_autorefs)
+  install_autorefs
   ;;
 
 install_autoref_tigers)
