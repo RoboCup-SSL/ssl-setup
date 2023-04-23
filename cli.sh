@@ -138,7 +138,7 @@ EOF
   fi
 
   mkdir -p "${desktop_folder}"
-  cp "${SCRIPT_DIR}/desktop/auto-referees-tigers.desktop" "${desktop_folder}"
+  cp "${SCRIPT_DIR}/desktop/auto-referee-tigers.desktop" "${desktop_folder}"
 }
 
 function uninstall_autoref_tigers() {
