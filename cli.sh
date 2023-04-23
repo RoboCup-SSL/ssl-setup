@@ -110,6 +110,10 @@ function install_autorefs() {
   install_autoref_tigers
 }
 
+function uninstall_autorefs() {
+  uninstall_autoref_tigers
+}
+
 function install_autoref_tigers() {
   local -r repo="AutoReferee"
   local version
@@ -217,6 +221,10 @@ uninstall_systemd)
 
 install_autorefs)
   install_autorefs
+  ;;
+
+uninstall_autorefs)
+  uninstall_autorefs
   ;;
 
 install_autoref_tigers)
