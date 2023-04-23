@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=start-match
-Comment=
-Exec=%h/.local/bin/start-match
-Icon=%h/.local/share/start-match-icon.png
-Terminal=false
-Type=Application
