@@ -138,7 +138,7 @@ function configure_system() {
   sudo apt update
   sudo apt upgrade -y
   which snap >/dev/null && sudo snap refresh
-  sudo apt install -y git neovim curl terminator remmina openjdk-17-jre
+  sudo apt install -y git neovim curl jq terminator remmina openjdk-17-jre
 
   echo "Disable screensaver"
   which gsettings >/dev/null && gsettings set org.gnome.desktop.screensaver lock-enabled false
