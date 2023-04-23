@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=AutoReferee TIGERs
-Exec=%h/.local/bin/auto-referee-tigers -a
+Exec=/bin/sh -c "$HOME/.local/bin/auto-referee-tigers -a"
 Terminal=false
