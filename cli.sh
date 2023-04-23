@@ -105,7 +105,7 @@ function install_autoref_tigers() {
   version_tag="$(latest_version "TIGERs-Mannheim" "${repo}")"
   version="${version_tag#version/*}"
   echo "Latest version of ${repo} is ${version}"
-set -x
+
   mkdir -p "${autoref_folder}"
   local archive_name="autoReferee.zip"
   local archive_path="${autoref_folder}/autoReferee-${version}.zip"
@@ -125,6 +125,9 @@ bin/autoReferee "\$@"
 EOF
     chmod +x "${binary_folder}/auto-referee-tigers"
   fi
+
+  mkdir -p "$HOME/Desktop"
+  cp "${SCRIPT_DIR}/auto-referees/AutoReferee_TIGERs.desktop" "$HOME/Desktop"
 }
 
 function uninstall_autoref_tigers() {
