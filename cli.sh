@@ -8,6 +8,7 @@ readonly goos="linux"
 readonly goarch="amd64"
 readonly binary_folder="$HOME/.local/bin"
 readonly config_folder="$HOME/.config"
+readonly desktop_folder="$HOME/Desktop"
 readonly systemd_folder="$HOME/.local/share/systemd/user"
 readonly autoref_folder="$HOME/.local/share/auto-referees"
 declare -A app_repo_map
@@ -54,6 +55,11 @@ function install_app() {
     rm -f "${binary_folder}/${app}"
     (cd "${binary_folder}" && ln -s "${binary_name}" "${app}")
   fi
+
+  if [[ -f "${SCRIPT_DIR}/desktop/${app}.desktop" ]]; then
+    mkdir -p "${desktop_folder}"
+    cp "${SCRIPT_DIR}/desktop/${app}.desktop" "${desktop_folder}"
+  fi
 }
 
 function uninstall_app() {
@@ -63,6 +69,7 @@ function uninstall_app() {
   uninstall_systemd "${app}"
   rm -f "${binary_folder}/${app}"
   rm -f "${binary_folder}/${app}_"*
+  rm -f "${desktop_folder}/${app}.desktop"
 }
 
 function install_systemd() {
@@ -130,12 +137,13 @@ EOF
     chmod +x "${binary_folder}/auto-referee-tigers"
   fi
 
-  mkdir -p "$HOME/Desktop"
-  cp "${SCRIPT_DIR}/auto-referees/AutoReferee_TIGERs.desktop" "$HOME/Desktop"
+  mkdir -p "${desktop_folder}"
+  cp "${SCRIPT_DIR}/desktop/auto-referees-tigers.desktop" "${desktop_folder}"
 }
 
 function uninstall_autoref_tigers() {
   rm -rf "${autoref_folder}/autoReferee"*
+  rm -f "${desktop_folder}/auto-referee-tigers.desktop"
 }
 
 function configure_system() {

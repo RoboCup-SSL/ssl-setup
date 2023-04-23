@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=SSL Vision Client
+Exec=xdg-open http://localhost:8082
+Terminal=false
