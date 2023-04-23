@@ -1,0 +1,13 @@
+name: Test
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./cli.sh configure_system
+      - run: ./cli.sh install_apps
+      - run: ./cli.sh install_systemd
+      - run: ./cli.sh install_autoref_tigers

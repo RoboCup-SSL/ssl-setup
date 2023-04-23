@@ -42,6 +42,8 @@ Install all:
 ./cli.sh install_apps
 # Install all systemd services
 ./cli.sh install_systemd
+# Install autorefs
+./cli.sh install_autoref_tigers
 ```
 
 ### Status-Board
