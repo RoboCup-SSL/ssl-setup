@@ -12,7 +12,7 @@ services:
     network_mode: host
 
   ssl-game-controller:
-    image: robocupssl/ssl-game-controller:2.12.7
+    image: robocupssl/ssl-game-controller:2.16.1
     command: [ "-address", ":8081" ]
     network_mode: host
     volumes:
