@@ -15,14 +15,17 @@ declare -A app_repo_map
 app_repo_map["ssl-game-controller"]="ssl-game-controller"
 app_repo_map["ssl-ref-client"]="ssl-game-controller"
 app_repo_map["ssl-auto-recorder"]="ssl-go-tools"
+app_repo_map["ssl-multicast-sources"]="ssl-go-tools"
 app_repo_map["ssl-vision-client"]="ssl-vision-client"
 app_repo_map["ssl-vision-cli"]="ssl-vision-client"
+app_repo_map["ssl-quality-inspector"]="ssl-quality-inspector"
+app_repo_map["ssl-status-board"]="ssl-status-board"
 
 readonly action=${1:-}
 readonly param_app=${2:-}
 
 apps=("${!app_repo_map[@]}")
-systemd_services=(ssl-game-controller ssl-auto-recorder ssl-vision-client)
+systemd_services=(ssl-game-controller ssl-auto-recorder ssl-vision-client ssl-status-board)
 
 if [[ -n "${param_app}" ]]; then
   if [[ -z "${app_repo_map[$param_app]+x}" ]]; then
@@ -78,13 +81,11 @@ function install_systemd() {
   install_app "${app}"
   echo "Installing systemd service for ${app}"
   if [[ -f "${SCRIPT_DIR}/systemd/${app}.service" ]]; then
-    if ! systemctl --user | grep "${app}.service" >/dev/null; then
-      mkdir -p "${systemd_folder}"
-      cp "${SCRIPT_DIR}/systemd/${app}.service" "${systemd_folder}"
-      mkdir -p "${config_folder}/${app}"
-      systemctl --user enable "${app}.service"
-      systemctl --user daemon-reload
-    fi
+    mkdir -p "${systemd_folder}"
+    cp "${SCRIPT_DIR}/systemd/${app}.service" "${systemd_folder}"
+    mkdir -p "${config_folder}/${app}"
+    systemctl --user enable "${app}.service"
+    systemctl --user daemon-reload
     echo "Restarting app for ${app}"
     systemctl --user restart "${app}.service"
   else
@@ -133,7 +134,7 @@ function install_autoref_tigers() {
     unzip "${archive_path}" -d "${autoref_folder}"
     mv "${autoref_folder}/autoReferee" "${autoref_folder}/autoReferee-${version}"
     (cd "${autoref_folder}" && ln -s "autoReferee-${version}" "autoReferee")
-    cat << EOF > "${binary_folder}/auto-referee-tigers"
+    cat <<EOF >"${binary_folder}/auto-referee-tigers"
 #!/usr/bin/env bash
 cd "${autoref_folder}/autoReferee"
 bin/autoReferee "\$@"

@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=%h/.local/bin/ssl-vision-client
+ExecStart=%h/.local/bin/ssl-vision-client -address :8082
 WorkingDirectory=%h/.config/ssl-vision-client
 
 [Install]

@@ -5,8 +5,8 @@ After=network-online.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=%h/.local/bin/ssl-game-controller -address localhost:8081
-WorkingDirectory=%h/.config/ssl-game-controller
+ExecStart=%h/.local/bin/ssl-status-board -address :8083
+WorkingDirectory=%h/.config/ssl-status-board
 
 [Install]
 WantedBy=default.target
