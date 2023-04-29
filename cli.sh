@@ -149,6 +149,7 @@ EOF
 function uninstall_autoref_tigers() {
   rm -rf "${autoref_folder}/autoReferee"*
   rm -f "${desktop_folder}/auto-referee-tigers.desktop"
+  rm -f "${binary_folder}/auto-referee-tigers"
 }
 
 function configure_system() {
