@@ -19,7 +19,7 @@ services:
       - ./ssl-game-controller/:/config:rw
 
   ssl-auto-recorder:
-    image: robocupssl/ssl-auto-recorder:1.3.7
+    image: robocupssl/ssl-auto-recorder:1.3.8
     network_mode: host
     volumes:
       - ./ssl-auto-recorder/:/data:rw
