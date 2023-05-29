@@ -240,6 +240,7 @@ uninstall_autoref_tigers)
 *)
   echo "Invalid action. Valid actions are:"
   echo "  configure_system"
+  echo "  apps"
   echo "  install_apps uninstall_apps"
   echo "  install_systemd uninstall_systemd"
   echo "  install_autorefs uninstall_autorefs"

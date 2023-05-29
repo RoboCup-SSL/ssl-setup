@@ -8,12 +8,12 @@ services:
 
   ssl-status-board:
     image: robocupssl/ssl-status-board:2.9.1
-    command: [ "-address", ":8080" ]
+    command: [ "-address", ":8083" ]
     network_mode: host
 
   ssl-game-controller:
     image: robocupssl/ssl-game-controller:3.4.3
-    command: [ "-address", ":8081" ]
+    command: [ "-address", "localhost:8081" ]
     network_mode: host
     volumes:
       - ./ssl-game-controller/:/config:rw
