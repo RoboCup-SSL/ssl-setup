@@ -7,7 +7,7 @@ services:
     network_mode: host
 
   ssl-status-board:
-    image: robocupssl/ssl-status-board:2.9.1
+    image: robocupssl/ssl-status-board:2.9.2
     command: [ "-address", ":8083" ]
     network_mode: host
 
