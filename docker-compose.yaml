@@ -6,13 +6,13 @@ volumes:
 
 services:
   ssl-vision-client:
-    image: robocupssl/ssl-vision-client:1.7.1
+    image: robocupssl/ssl-vision-client:1.7.2
     command: [ "-address", ":8082" ]
     network_mode: host
     restart: unless-stopped
 
   ssl-status-board:
-    image: robocupssl/ssl-status-board:2.9.2
+    image: robocupssl/ssl-status-board:2.9.3
     command: [ "-address", ":8083" ]
     network_mode: host
     restart: unless-stopped
@@ -27,6 +27,7 @@ services:
 
   ssl-auto-recorder:
     image: robocupssl/ssl-auto-recorder:1.4.1
+    command: [ "-http-port", "8084" ]
     network_mode: host
     restart: unless-stopped
     volumes:
