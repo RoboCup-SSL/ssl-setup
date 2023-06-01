@@ -1,5 +1,9 @@
 version: '3'
 
+volumes:
+  ssl-game-controller-volume:
+  ssl-auto-recorder-volume:
+
 services:
   ssl-vision-client:
     image: robocupssl/ssl-vision-client:1.7.1
@@ -16,13 +20,13 @@ services:
     command: [ "-address", "localhost:8081" ]
     network_mode: host
     volumes:
-      - ./ssl-game-controller/:/config:rw
+      - "ssl-game-controller-volume:/config:rw"
 
   ssl-auto-recorder:
     image: robocupssl/ssl-auto-recorder:1.3.8
     network_mode: host
     volumes:
-      - ./ssl-auto-recorder/:/data:rw
+      - "ssl-auto-recorder-volume:/data:rw"
 
   autoref-tigers:
     image: tigersmannheim/auto-referee-vnc:1.0.0
