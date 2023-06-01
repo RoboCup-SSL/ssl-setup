@@ -9,22 +9,26 @@ services:
     image: robocupssl/ssl-vision-client:1.7.1
     command: [ "-address", ":8082" ]
     network_mode: host
+    restart: unless-stopped
 
   ssl-status-board:
     image: robocupssl/ssl-status-board:2.9.2
     command: [ "-address", ":8083" ]
     network_mode: host
+    restart: unless-stopped
 
   ssl-game-controller:
     image: robocupssl/ssl-game-controller:3.5.1
     command: [ "-address", "localhost:8081" ]
     network_mode: host
+    restart: unless-stopped
     volumes:
       - "ssl-game-controller-volume:/config:rw"
 
   ssl-auto-recorder:
     image: robocupssl/ssl-auto-recorder:1.3.8
     network_mode: host
+    restart: unless-stopped
     volumes:
       - "ssl-auto-recorder-volume:/data:rw"
 
@@ -39,7 +43,9 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
+    restart: unless-stopped
 
   autoref-erforce:
     image: roboticserlangen/autoref:commit-e7313ef21be6
     network_mode: host
+    restart: unless-stopped
