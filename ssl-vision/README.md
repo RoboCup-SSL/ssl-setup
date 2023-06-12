@@ -22,3 +22,13 @@ To configure everything in the correct order, run:
 ```
 
 There is some interaction required.
+
+## Optional: Update firmware of the camera
+
+The camera firmware can be updated with the following CLI tool, included in the Spinnaker SDK:
+
+```shell
+SpinUpdateConsole '-R.*' BFS-U3-51S5-Package/BFS-U3-51S5_1801.0.1.0.ez2
+```
+
+The latest firmware can be found here: https://www.flir.com/support/products/blackfly-s-usb3/?vertical=machine+vision&segment=iis#Downloads
