@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   ssl-game-controller:
-    image: robocupssl/ssl-game-controller:3.5.2
+    image: robocupssl/ssl-game-controller:3.5.3
     command: [ "-address", "localhost:8081" ]
     network_mode: host
     restart: unless-stopped
