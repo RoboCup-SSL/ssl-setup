@@ -109,10 +109,12 @@ function uninstall_systemd() {
 
 function install_autorefs() {
   install_autoref_tigers
+  install_autoref_erforce
 }
 
 function uninstall_autorefs() {
   uninstall_autoref_tigers
+  uninstall_autoref_erforce
 }
 
 function install_autoref_tigers() {
@@ -150,6 +152,35 @@ function uninstall_autoref_tigers() {
   rm -rf "${autoref_folder}/autoReferee"*
   rm -f "${desktop_folder}/auto-referee-tigers.desktop"
   rm -f "${binary_folder}/auto-referee-tigers"
+}
+
+function install_autoref_erforce() {
+  mkdir -p "${autoref_folder}"
+  local local_repo_path="${autoref_folder}/erforce-autoref"
+
+  if [[ ! -d "${local_repo_path}" ]]; then
+    echo "Cloning https://github.com/robotics-erlangen/autoref.git"
+    mkdir -p "${autoref_folder}"
+    git clone https://github.com/robotics-erlangen/autoref.git "${local_repo_path}"
+    cd "${local_repo_path}"
+    ./install_ubuntu_deps.sh
+    ./build.sh
+    cat <<EOF >"${binary_folder}/auto-referee-erforce"
+#!/usr/bin/env bash
+cd "${local_repo_path}"
+build/bin/autoref "\$@"
+EOF
+    chmod +x "${binary_folder}/auto-referee-erforce"
+  fi
+
+  mkdir -p "${desktop_folder}"
+  cp "${local_repo_path}/build/autoref.desktop" "${desktop_folder}/autoref-erforce.desktop"
+}
+
+function uninstall_autoref_erforce() {
+  rm -rf "${autoref_folder}/erforce-autoref"*
+  rm -f "${desktop_folder}/autoref-erforce.desktop"
+  rm -f "${binary_folder}/auto-referee-erforce"
 }
 
 function configure_system() {
@@ -235,6 +266,14 @@ install_autoref_tigers)
 
 uninstall_autoref_tigers)
   uninstall_autoref_tigers
+  ;;
+
+install_autoref_erforce)
+  install_autoref_erforce
+  ;;
+
+uninstall_autoref_erforce)
+  uninstall_autoref_erforce
   ;;
 
 *)
