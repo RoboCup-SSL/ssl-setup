@@ -47,6 +47,11 @@ services:
     restart: unless-stopped
 
   autoref-erforce:
-    image: roboticserlangen/autoref:commit-e7313ef21be6
+    image: roboticserlangen/autoref:commit-6f15f574ea80
+    command: [ "gui" ]
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
     restart: unless-stopped
