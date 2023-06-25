@@ -33,7 +33,11 @@ Run at least:
 ```
 
 ### Game-Controller
-Install all:
+There are two ways to run all the software on the Game-Controller computer.
+You can install the software natively, or you can run it with Docker.
+You can also mix it.
+
+#### Native Installation
 
 ```shell
 # Configure Ubuntu
@@ -46,6 +50,31 @@ Install all:
 ./cli.sh install_autorefs
 ```
 
+#### Docker-Compose
+Pull all required docker images:
+
+```shell
+docker compose pull
+```
+
+Start only the basic tools without auto-referees:
+```shell
+docker compose up
+```
+
+You can run the auto-referees with their UI.
+This will only work on a Linux PC with an XOrg Server:
+
+```shell
+docker compose --profile autorefs-ui up 
+```
+
+Or you run the auto-referees in headless mode:
+
+```shell
+docker compose --profile autorefs-headless up
+```
+
 ### Status-Board
 See: https://github.com/RoboCup-SSL/ssl-status-board/blob/master/rpi/Readme.md
 
@@ -53,7 +82,7 @@ See: https://github.com/RoboCup-SSL/ssl-status-board/blob/master/rpi/Readme.md
 See: https://github.com/RoboCup-SSL/ssl-remote-control/blob/master/rpi/Readme.md
 
 ## Monitoring and Troubleshooting
-The following commands are available:
+The following commands are available for the natively installed apps:
 
 ```shell
 # List available apps

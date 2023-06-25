@@ -35,9 +35,22 @@ services:
 
   autoref-tigers:
     image: tigersmannheim/auto-referee-vnc:1.0.0
-    # Headless
-    # command: [ "-a", "-hl" ]
-    # With UI
+    command: [ "-a", "-hl" ]
+    network_mode: host
+    restart: on-failure
+    profiles:
+      - autorefs-headless
+
+  autoref-erforce:
+    image: roboticserlangen/autoref:commit-6f15f574ea80
+    command: [ ]
+    network_mode: host
+    restart: on-failure
+    profiles:
+      - autorefs-headless
+
+  autoref-ui-tigers:
+    image: tigersmannheim/auto-referee-vnc:1.0.0
     command: [ "-a" ]
     environment:
       - DISPLAY=${DISPLAY}
@@ -45,12 +58,11 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
     restart: on-failure
+    profiles:
+      - autorefs-ui
 
-  autoref-erforce:
+  autoref-ui-erforce:
     image: roboticserlangen/autoref:commit-6f15f574ea80
-    # Headless
-    # command: [ ]
-    # With UI
     command: [ "gui" ]
     environment:
       - DISPLAY=${DISPLAY}
@@ -58,3 +70,5 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
     restart: on-failure
+    profiles:
+      - autorefs-ui
