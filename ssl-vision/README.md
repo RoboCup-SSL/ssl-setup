@@ -10,7 +10,7 @@ The scripts assume a *Xubuntu 22.04* installation.
 During installation, select the *Minimal Installation* and the following user settings:
 
 * Username: `vision`
-* Hostname: `ssl-vision-X` (as labeled on the NUC)
+* Hostname: `ssl-vision-x` (as labeled on the NUC)
 * Automatic Login: Yes
 
 ## Execution
@@ -23,8 +23,28 @@ To configure everything in the correct order, run:
 
 There is some interaction required.
 
-## Optional: Update firmware of the camera
+## Configure chrony for multiple camera setups
+If there is more than one camera for one field, like in division A, the clocks of all computers, that are running ssl-vision, have to be synchronized.
+The scripts install chrony, an NTP server implementation and interactively ask for the server IP. You can run the script again for reconfiguration:
 
+```shell
+./configure-chrony.sh
+```
+
+Afterward, it may take some time until the client as synchronized. Here are some useful commands:
+
+```shell
+# Make a step (instead of slewing) - requires some measurements, so you may need to wait a bit before running it
+chronyc -a makestep
+
+# List sources (should only be one)
+chronyc sources
+
+# Show tracking offset
+chronyc tracking
+```
+
+## Optional: Update firmware of the camera
 The camera firmware can be updated with the following CLI tool, included in the Spinnaker SDK:
 
 ```shell
