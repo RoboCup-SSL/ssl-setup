@@ -12,7 +12,7 @@ services:
     restart: on-failure
 
   ssl-status-board:
-    image: robocupssl/ssl-status-board:2.10.3
+    image: robocupssl/ssl-status-board:2.10.4
     command: [ "-address", ":8083" ]
     network_mode: host
     restart: on-failure
