@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eEuo pipefail
+log_error() { echo "Script failed at $(caller)"; }
+trap log_error ERR
 
 # determine current script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
@@ -39,7 +41,7 @@ fi
 function latest_version() {
   local -r org="$1"
   local -r repo="$2"
-  curl -s "https://api.github.com/repos/${org}/${repo}/releases/latest" | jq -r '.tag_name'
+  curl -s -f "https://api.github.com/repos/${org}/${repo}/releases/latest" | jq -r '.tag_name'
 }
 
 function install_app() {
