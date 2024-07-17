@@ -75,6 +75,7 @@ Or you run the auto-referees in headless mode:
 docker compose --profile autorefs-headless up
 ```
 
+
 ### Status-Board
 See: https://github.com/RoboCup-SSL/ssl-status-board/blob/master/rpi/Readme.md
 
@@ -93,4 +94,23 @@ The following commands are available for the natively installed apps:
 
 # See logs of systemd services
 ./cli.sh logs [app]
+```
+
+## Known Issues: 
+
+### GC Not Responding
+
+If the GC (Game Controller) is unresponsive to any event, try deleting the state file. This issue may occur if the GC has been active for an extended period and has recognized too many events.
+
+**Caution:** Deleting the state file will erase the current game state for the GC.
+
+```shell
+# stop apps
+./cli.sh stop
+
+# delete bad state stream
+rm ~/.config/ssl-game-controller/config/state-store.json.stream 
+
+# restart apps
+./cli.sh start
 ```
