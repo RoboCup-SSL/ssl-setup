@@ -105,12 +105,12 @@ If the GC (Game Controller) is unresponsive to any event, try deleting the state
 **Caution:** Deleting the state file will erase the current game state for the GC.
 
 ```shell
+# stop apps
+./cli.sh stop
 
-./cli.sh stop # stop apps
+# delete bad state stream
+rm ~/.config/ssl-game-controller/config/state-store.json.stream 
 
-cd ~/.config/ssl-game-controller/config
-rm state-store.json.stream # delete bad state stream
-
-./cli.sh restart # restart apps
-
+# restart apps
+./cli.sh start
 ```
