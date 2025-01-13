@@ -6,19 +6,19 @@ volumes:
 
 services:
   ssl-vision-client:
-    image: robocupssl/ssl-vision-client:1.7.3
+    image: robocupssl/ssl-vision-client:1.7.3@sha256:265f8cc1c620a9d83224b739e605abc8a4ffef4e75735047999e16e21a577e79
     command: [ "-address", ":8082" ]
     network_mode: host
     restart: on-failure
 
   ssl-status-board:
-    image: robocupssl/ssl-status-board:2.10.4
+    image: robocupssl/ssl-status-board:2.10.4@sha256:74a5eef17dbf34ec88b4061c31ce6e492188380c9568cd7f4c6f314de02b7583
     command: [ "-address", ":8083" ]
     network_mode: host
     restart: on-failure
 
   ssl-game-controller:
-    image: robocupssl/ssl-game-controller:3.7.3
+    image: robocupssl/ssl-game-controller:3.7.3@sha256:f62f339b1627fe6dccad1cbad29a4f817a85d0321f0eb7b1f93a6b9806493a91
     command: [ "-address", "localhost:8081" ]
     network_mode: host
     restart: on-failure
@@ -42,7 +42,7 @@ services:
       - autorefs-headless
 
   autoref-erforce:
-    image: roboticserlangen/autoref:commit-6f15f574ea80
+    image: roboticserlangen/autoref:commit-6f15f574ea80@sha256:3d7c5933c12eb193a1fefcfd6aba86fba42875c588cc883dc20d0bfcb66b11cb
     command: [ ]
     network_mode: host
     restart: on-failure
@@ -62,7 +62,7 @@ services:
       - autorefs-ui
 
   autoref-ui-erforce:
-    image: roboticserlangen/autoref:commit-6f15f574ea80
+    image: roboticserlangen/autoref:commit-6f15f574ea80@sha256:3d7c5933c12eb193a1fefcfd6aba86fba42875c588cc883dc20d0bfcb66b11cb
     command: [ "gui" ]
     environment:
       - DISPLAY=${DISPLAY}
