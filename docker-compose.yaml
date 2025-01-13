@@ -34,7 +34,7 @@ services:
       - "ssl-auto-recorder-volume:/data:rw"
 
   autoref-tigers:
-    image: tigersmannheim/auto-referee-vnc:1.2.0
+    image: tigersmannheim/auto-referee-vnc:1.5.0@sha256:0314e19644bad38ad2f2b2b81f654ce3828fdcebd3dbe1152929076ebdc61dae
     command: [ "-a", "-hl" ]
     network_mode: host
     restart: on-failure
@@ -50,7 +50,7 @@ services:
       - autorefs-headless
 
   autoref-ui-tigers:
-    image: tigersmannheim/auto-referee-vnc:1.2.0
+    image: tigersmannheim/auto-referee-vnc:1.5.0@sha256:0314e19644bad38ad2f2b2b81f654ce3828fdcebd3dbe1152929076ebdc61dae
     command: [ "-a" ]
     environment:
       - DISPLAY=${DISPLAY}
