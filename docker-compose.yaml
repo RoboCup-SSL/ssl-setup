@@ -18,7 +18,7 @@ services:
     restart: on-failure
 
   ssl-game-controller:
-    image: robocupssl/ssl-game-controller:3.12.8@sha256:0f520d99a7af6e3a59d93edd60ba68e424917a414cf34b60974d17e84174c7e9
+    image: robocupssl/ssl-game-controller:3.12.9@sha256:dc8cb5b414760aee28ed1f54f3c880acc6f27082892d1ff5f8a9269144e3ff89
     command: [ "-address", "localhost:8081" ]
     network_mode: host
     restart: on-failure
