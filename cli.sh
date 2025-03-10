@@ -190,16 +190,21 @@ function install_audioref() {
 
   if [[ ! -d "${local_repo_path}" ]]; then
     sudo apt install -y python3-venv python3-dev libasound2-dev
+
     echo "Cloning https://github.com/TIGERs-Mannheim/AudioRef.git"
     git clone https://github.com/TIGERs-Mannheim/AudioRef.git "${audioref_path}"
     cd "${audioref_path}"
+
     python3 -m venv venv
     source venv/bin/activate
     pip install -r requirements.txt
+
+    install_systemd audioref
   fi
 }
 
 function uninstall_audioref() {
+  uninstall_systemd audioref
   rm -rf "audioref"
 }
 
