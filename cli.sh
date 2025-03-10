@@ -185,6 +185,24 @@ function uninstall_autoref_erforce() {
   rm -f "${binary_folder}/auto-referee-erforce"
 }
 
+function install_audioref() {
+  local audioref_path="audioref"
+
+  if [[ ! -d "${local_repo_path}" ]]; then
+    sudo apt install -y python3-venv python3-dev libasound2-dev
+    echo "Cloning https://github.com/TIGERs-Mannheim/AudioRef.git"
+    git clone https://github.com/TIGERs-Mannheim/AudioRef.git "${audioref_path}"
+    cd "${audioref_path}"
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+  fi
+}
+
+function uninstall_audioref() {
+  rm -rf "audioref"
+}
+
 function configure_system() {
   sudo apt update
   sudo apt upgrade -y
@@ -262,6 +280,14 @@ uninstall_autorefs)
   uninstall_autorefs
   ;;
 
+install_audioref)
+  install_audioref
+  ;;
+
+uninstall_audioref)
+  uninstall_audioref
+  ;;
+
 install_autoref_tigers)
   install_autoref_tigers
   ;;
@@ -285,6 +311,7 @@ uninstall_autoref_erforce)
   echo "  install_apps uninstall_apps"
   echo "  install_systemd uninstall_systemd"
   echo "  install_autorefs uninstall_autorefs"
+  echo "  install_audioref uninstall_audioref"
   echo "  status start stop restart"
   echo "  logs"
   ;;
