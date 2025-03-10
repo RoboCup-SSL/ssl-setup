@@ -13,3 +13,4 @@ jobs:
       - run: ./cli.sh install_apps
       - run: ./cli.sh install_systemd
       - run: ./cli.sh install_autorefs
+      - run: ./cli.sh install_audioref
