@@ -188,7 +188,7 @@ function uninstall_autoref_erforce() {
 function install_audioref() {
   local audioref_path="audioref"
 
-  if [[ ! -d "${local_repo_path}" ]]; then
+  if [[ ! -d "${audioref_path}" ]]; then
     sudo apt install -y python3-venv python3-dev libasound2-dev
 
     echo "Cloning https://github.com/TIGERs-Mannheim/AudioRef.git"
@@ -200,6 +200,10 @@ function install_audioref() {
     pip install -r requirements.txt
 
     install_systemd audioref
+  else
+    cd "${audioref_path}"
+    echo "Updating AudioRef"
+    git pull
   fi
 }
 
