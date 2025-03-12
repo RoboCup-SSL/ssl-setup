@@ -80,7 +80,6 @@ function uninstall_app() {
 function install_systemd() {
   local -r app="$1"
 
-  install_app "${app}"
   echo "Installing systemd service for ${app}"
   if [[ -f "${SCRIPT_DIR}/systemd/${app}.service" ]]; then
     mkdir -p "${systemd_folder}"
