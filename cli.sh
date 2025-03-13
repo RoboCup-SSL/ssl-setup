@@ -27,7 +27,7 @@ readonly action=${1:-}
 readonly param_app=${2:-}
 
 apps=("${!app_repo_map[@]}")
-systemd_services=(ssl-game-controller ssl-auto-recorder ssl-vision-client ssl-status-board)
+systemd_services=(ssl-game-controller ssl-auto-recorder ssl-vision-client ssl-status-board ssl-auto-recorder-backup-vision)
 
 if [[ -n "${param_app}" ]]; then
   if [[ -z "${app_repo_map[$param_app]+x}" ]]; then
