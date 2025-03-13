@@ -5,7 +5,7 @@ After=network-online.target
 [Service]
 Type=simple
 Restart=always
-ExecStart=%h/.local/bin/ssl-auto-recorder -vision-address 224.5.23.2:10016
+ExecStart=%h/.local/bin/ssl-auto-recorder -vision-address 224.5.23.2:10016 -http-port 8086
 WorkingDirectory=%h/.config/ssl-auto-recorder-backup-vision
 
 [Install]
