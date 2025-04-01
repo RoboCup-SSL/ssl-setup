@@ -26,7 +26,7 @@ services:
       - "ssl-game-controller-volume:/config:rw"
 
   ssl-auto-recorder:
-    image: robocupssl/ssl-auto-recorder:1.8.1@sha256:93f846fc00062708bc21b57c07026ec89d5b127f4bf39343ad1f415e0ed4fc16
+    image: robocupssl/ssl-auto-recorder:1.8.3@sha256:2840b168b40503ef2cc9d15d11361dfb32157b523bae83657954eeee709638b3
     command: [ "-http-port", "8084" ]
     network_mode: host
     restart: on-failure
