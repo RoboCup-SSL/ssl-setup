@@ -6,7 +6,7 @@ volumes:
 
 services:
   ssl-vision-client:
-    image: robocupssl/ssl-vision-client:1.8.3@sha256:b12f0dcd3ed778b786f07a36150c5797366a361de64ec319e974a7e50d75a739
+    image: robocupssl/ssl-vision-client:2.0.0@sha256:69e4014c54894c503d0e2858e1497578351ec972f18ac29ca4fe374b73b4a594
     command: [ "-address", ":8082" ]
     network_mode: host
     restart: on-failure
