@@ -23,6 +23,14 @@ To configure everything in the correct order, run:
 
 There is some interaction required.
 
+### Vision Processor 
+
+To setup a nuc with [vision-processor](https://github.com/TIGERs-Mannheim/vision-processor) instead, run:
+```shell
+./configure.sh vp
+```
+
+
 ## Configure chrony for multiple camera setups
 If there is more than one camera for one field, like in division A, the clocks of all computers, that are running ssl-vision, have to be synchronized.
 The scripts install chrony, an NTP server implementation and interactively ask for the server IP. You can run the script again for reconfiguration:
