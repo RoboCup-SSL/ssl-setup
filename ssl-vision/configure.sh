@@ -15,7 +15,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 "${SCRIPT_DIR}"/configure-chrony.sh
 "${SCRIPT_DIR}"/configure-vnc.sh
 "${SCRIPT_DIR}"/configure-spinnaker.sh
-if [ "$1" == "vp" ];
+if [[ "${1:-}" == "vp" ]]; 
   then
     "${SCRIPT_DIR}"/configure-vision-processor.sh
   else
