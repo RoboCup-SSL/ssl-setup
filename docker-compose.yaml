@@ -1,9 +1,3 @@
-version: '3'
-
-volumes:
-  ssl-game-controller-volume:
-  ssl-auto-recorder-volume:
-
 services:
   ssl-vision-client:
     image: robocupssl/ssl-vision-client:2.0.0@sha256:69e4014c54894c503d0e2858e1497578351ec972f18ac29ca4fe374b73b4a594
@@ -23,7 +17,7 @@ services:
     network_mode: host
     restart: on-failure
     volumes:
-      - "ssl-game-controller-volume:/config:rw"
+      - "./data/ssl-game-controller:/config:rw"
 
   ssl-auto-recorder:
     image: robocupssl/ssl-auto-recorder:1.8.4@sha256:e319a2b42ce02216cf1bce49d9aa4e974d5a624084bed175327e07ce93fffb5b
@@ -31,7 +25,7 @@ services:
     network_mode: host
     restart: on-failure
     volumes:
-      - "ssl-auto-recorder-volume:/data:rw"
+      - "./data/ssl-auto-recorder:/data:rw"
 
   autoref-tigers:
     image: tigersmannheim/auto-referee-vnc:1.5.5@sha256:c58a19d5f0da89b24c8dd7d2d6087762537e018102aa0c28f28dadd7ad986851
@@ -53,7 +47,7 @@ services:
     image: tigersmannheim/auto-referee-vnc:1.5.5@sha256:c58a19d5f0da89b24c8dd7d2d6087762537e018102aa0c28f28dadd7ad986851
     command: [ "-a" ]
     environment:
-      - DISPLAY=${DISPLAY}
+      - DISPLAY=${DISPLAY:-}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
@@ -65,7 +59,7 @@ services:
     image: roboticserlangen/autoref:commit-6f15f574ea80@sha256:3d7c5933c12eb193a1fefcfd6aba86fba42875c588cc883dc20d0bfcb66b11cb
     command: [ "gui" ]
     environment:
-      - DISPLAY=${DISPLAY}
+      - DISPLAY=${DISPLAY:-}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: host
