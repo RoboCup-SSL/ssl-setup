@@ -6,11 +6,12 @@ Users connect to this computer with VNC from another computer next to the field.
 The scripts set up such a computer.
 
 ## Preparation
-The scripts assume a *Xubuntu 22.04* installation.
+The scripts assume a *Xubuntu 24.04* installation.
 During installation, select the *Minimal Installation* and the following user settings:
 
 * Username: `vision`
 * Hostname: `ssl-vision-x` (as labeled on the NUC)
+* Require my password to login: No
 * Automatic Login: Yes
 
 ## Execution
